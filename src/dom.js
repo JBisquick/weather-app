@@ -54,12 +54,16 @@ function loadHourlyWeather(hourlyData) {
 
     const image = document.createElement('img');
     hourContainer.appendChild(image);
-    image.src = 'https:' + hour.condition.icon;
+    image.src = 'https:' + hour.icon;
 
     const temp = document.createElement('div');
     hourContainer.appendChild(temp);
-    temp.textContent = hour.temp_f;
+    temp.textContent = hour.tempF;
   } 
 }
 
-export { loadCurrentWeather, loadHourlyWeather };
+function loadDailyWeather() {
+
+}
+
+export { loadCurrentWeather, loadHourlyWeather, loadDailyWeather };

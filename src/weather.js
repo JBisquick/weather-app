@@ -42,12 +42,28 @@ function getHourlyData(data) {
   for (const hour of hoursTogether) {
     // to load only the next 24 hours
     if ((i < 24) && (data.location.localtime_epoch < hour.time_epoch)) {
-      nextDayHours.push(hour);
+      const time = hour.time;
+      const icon = hour.condition.icon;
+      const tempF = hour.temp_f;
+      const hourData = { time, icon, tempF };
+      nextDayHours.push(hourData);
       i++;
     }
   }
-  
   return nextDayHours;
 }
 
-export { getWeatherData, getCurrentWeather, getHourlyData };
+function getDailyData(data) {
+  const dailyData = [];
+  for (const day of data.forecast.forecastday) {
+    const date = day.date;
+    const icon = day.condition.icon;
+    const highTemp = day.day.maxtemp_f;
+    const lowTemp = day.day.mintemp_f;
+    const dayData = { date, icon, highTemp, lowTemp };
+    dailyData.push(dayData);
+  }
+  return dailyData;
+}
+
+export { getWeatherData, getCurrentWeather, getHourlyData, getDailyData };

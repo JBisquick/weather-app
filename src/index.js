@@ -1,3 +1,6 @@
-import { getCurrentData } from './weather';
+import { loadPage } from './controller'; 
+import './style.css';
 
-getCurrentData('Auckland');
+const searchButton = document.querySelector('.search');
+
+searchButton.addEventListener('click', loadPage)

@@ -62,8 +62,31 @@ function loadHourlyWeather(hourlyData) {
   } 
 }
 
-function loadDailyWeather() {
+function loadDailyWeather(dailyData) {
+  const container = document.querySelector('.daily-content');
+  container.innerHTML = '';
 
+  for (const day of dailyData) {
+    const dayContainer = document.createElement('div');
+    container.appendChild(dayContainer);
+    dayContainer.classList.add('day-container');
+
+    const time = document.createElement('div');
+    dayContainer.appendChild(time);
+    time.textContent = day.date;
+
+    const image = document.createElement('img');
+    dayContainer.appendChild(image);
+    image.src = 'https:' + day.icon;
+
+    const lowTemp = document.createElement('div');
+    dayContainer.appendChild(lowTemp);
+    lowTemp.textContent = day.lowTemp;
+
+    const highTemp = document.createElement('div');
+    dayContainer.appendChild(highTemp);
+    highTemp.textContent = day.highTemp;
+  }
 }
 
 export { loadCurrentWeather, loadHourlyWeather, loadDailyWeather };

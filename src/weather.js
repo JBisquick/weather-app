@@ -57,7 +57,7 @@ function getDailyData(data) {
   const dailyData = [];
   for (const day of data.forecast.forecastday) {
     const date = day.date;
-    const icon = day.condition.icon;
+    const icon = day.day.condition.icon;
     const highTemp = day.day.maxtemp_f;
     const lowTemp = day.day.mintemp_f;
     const dayData = { date, icon, highTemp, lowTemp };

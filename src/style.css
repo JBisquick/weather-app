@@ -49,3 +49,16 @@ input {
 .daily-content {
   border: 1px black solid;
 }
+
+.daily-content {
+  border: 1px black solid;
+  display: grid;
+  grid-auto-flow: column;
+  overflow: scroll;
+  gap: 10px;
+}
+
+.day-container {
+  display: flex;
+  flex-direction: column;
+}

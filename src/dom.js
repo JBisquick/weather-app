@@ -28,7 +28,7 @@ function loadCurrentWeather(data) {
 
   const temp = document.createElement('div');
   regionContainer.appendChild(temp);
-  temp.textContent = data.tempF;
+  temp.textContent = data.tempF + 'F';
 
   const weatherImg = document.createElement('img');
   container.appendChild(weatherImg);
@@ -39,4 +39,27 @@ function loadCurrentWeather(data) {
   time.textContent = data.localTime;
 }
 
-export { loadCurrentWeather };
+function loadHourlyWeather(hourlyData) {
+  const container = document.querySelector('.hourly-content');
+  container.innerHTML = '';
+
+  for (const hour of hourlyData) {
+    const hourContainer = document.createElement('div');
+    container.appendChild(hourContainer);
+    hourContainer.classList.add('hour-container');
+
+    const time = document.createElement('div');
+    hourContainer.appendChild(time);
+    time.textContent = hour.time;
+
+    const image = document.createElement('img');
+    hourContainer.appendChild(image);
+    image.src = 'https:' + hour.condition.icon;
+
+    const temp = document.createElement('div');
+    hourContainer.appendChild(temp);
+    temp.textContent = hour.temp_f;
+  } 
+}
+
+export { loadCurrentWeather, loadHourlyWeather };

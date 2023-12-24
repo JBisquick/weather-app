@@ -1,7 +1,7 @@
 async function getWeatherData(location) {
   try {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=fd47a39edec545f9bee222513232012&q=${location}&dasy=3`,
+      `https://api.weatherapi.com/v1/forecast.json?key=fd47a39edec545f9bee222513232012&q=${location}&days=3`,
       { mode: 'cors' },
     );
     const data = await response.json();
@@ -14,7 +14,6 @@ async function getWeatherData(location) {
 
 function getCurrentWeather(data) {
   const tempF = data.current.temp_f;
-  const tempC = data.current.temp_c;
   const weather = data.current.condition.text;
   const weatherImg = data.current.condition.icon;
   const country = data.location.country;
@@ -24,7 +23,6 @@ function getCurrentWeather(data) {
 
   return {
     tempF,
-    tempC,
     weather,
     weatherImg,
     country,
@@ -34,8 +32,22 @@ function getCurrentWeather(data) {
   };
 }
 
-async function getHourlyData(data) {
+function getHourlyData(data) {
+  const hoursToday = data.forecast.forecastday[0].hour;
+  const hoursTomorrow = data.forecast.forecastday[1].hour;
+  const hoursTogether = hoursToday.concat(hoursTomorrow);
+  let nextDayHours = [];
+  let i = 0;
+
+  for (const hour of hoursTogether) {
+    // to load only the next 24 hours
+    if ((i < 24) && (data.location.localtime_epoch < hour.time_epoch)) {
+      nextDayHours.push(hour);
+      i++;
+    }
+  }
   
+  return nextDayHours;
 }
 
-export { getWeatherData, getCurrentWeather };
+export { getWeatherData, getCurrentWeather, getHourlyData };

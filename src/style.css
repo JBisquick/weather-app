@@ -35,6 +35,15 @@ input {
 
 .hourly-content {
   border: 1px black solid;
+  display: grid;
+  grid-auto-flow: column;
+  overflow: scroll;
+  gap: 10px;
+}
+
+.hour-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .daily-content {

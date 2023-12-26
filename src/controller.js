@@ -1,5 +1,14 @@
-import { getWeatherData, getCurrentWeather, getHourlyData, getDailyData } from './weather';
-import { loadCurrentWeather, loadHourlyWeather, loadDailyWeather } from './dom.js';
+import {
+  getWeatherData,
+  getCurrentWeather,
+  getHourlyData,
+  getDailyData,
+} from './weather';
+import {
+  loadCurrentWeather,
+  loadHourlyWeather,
+  loadDailyWeather,
+} from './dom.js';
 
 async function loadPage() {
   try {
@@ -13,6 +22,7 @@ async function loadPage() {
     loadHourlyWeather(hourlyData);
     loadDailyWeather(dailyData);
   } catch (error) {
+    alert('Place Not Found');
     console.log(error);
   }
 }

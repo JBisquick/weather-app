@@ -1,3 +1,5 @@
+import fromUnixTime from 'date-fns/fromUnixTime';
+
 function loadCurrentWeather(data) {
   const container = document.querySelector('.current-content');
   container.innerHTML = '';
@@ -26,17 +28,13 @@ function loadCurrentWeather(data) {
   regionContainer.appendChild(weather);
   weather.textContent = data.weather;
 
-  const temp = document.createElement('div');
-  regionContainer.appendChild(temp);
-  temp.textContent = data.tempF + 'F';
-
   const weatherImg = document.createElement('img');
   container.appendChild(weatherImg);
   weatherImg.src = 'https:' + data.weatherImg;
 
-  const time = document.createElement('div');
-  container.appendChild(time);
-  time.textContent = data.localTime;
+  const temp = document.createElement('div');
+  container.appendChild(temp);
+  temp.textContent = data.tempF + ' °F';
 }
 
 function loadHourlyWeather(hourlyData) {
@@ -50,7 +48,7 @@ function loadHourlyWeather(hourlyData) {
 
     const time = document.createElement('div');
     hourContainer.appendChild(time);
-    time.textContent = hour.time;
+    time.textContent = hour.time.slice(11, 16);
 
     const image = document.createElement('img');
     hourContainer.appendChild(image);
@@ -58,8 +56,8 @@ function loadHourlyWeather(hourlyData) {
 
     const temp = document.createElement('div');
     hourContainer.appendChild(temp);
-    temp.textContent = hour.tempF;
-  } 
+    temp.textContent = hour.tempF + ' °F';
+  }
 }
 
 function loadDailyWeather(dailyData) {
@@ -73,7 +71,7 @@ function loadDailyWeather(dailyData) {
 
     const time = document.createElement('div');
     dayContainer.appendChild(time);
-    time.textContent = day.date;
+    time.textContent = day.date.slice(5);
 
     const image = document.createElement('img');
     dayContainer.appendChild(image);
@@ -81,11 +79,11 @@ function loadDailyWeather(dailyData) {
 
     const lowTemp = document.createElement('div');
     dayContainer.appendChild(lowTemp);
-    lowTemp.textContent = day.lowTemp;
+    lowTemp.textContent = 'Low: ' + day.lowTemp + ' °F';
 
     const highTemp = document.createElement('div');
     dayContainer.appendChild(highTemp);
-    highTemp.textContent = day.highTemp;
+    highTemp.textContent = 'High: ' + day.highTemp + ' °F';
   }
 }
 

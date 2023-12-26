@@ -41,7 +41,7 @@ function getHourlyData(data) {
 
   for (const hour of hoursTogether) {
     // to load only the next 24 hours
-    if ((i < 24) && (data.location.localtime_epoch < hour.time_epoch)) {
+    if (i < 24 && data.location.localtime_epoch < hour.time_epoch) {
       const time = hour.time;
       const icon = hour.condition.icon;
       const tempF = hour.temp_f;
